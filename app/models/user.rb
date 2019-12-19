@@ -3,4 +3,6 @@
 class User < ApplicationRecord
   include Authentication
   has_many :examples
+  has_many :subjects
+  has_many :choices, through: :subjects
 end
