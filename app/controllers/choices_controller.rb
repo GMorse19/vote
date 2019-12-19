@@ -46,6 +46,6 @@ class ChoicesController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def choice_params
-      params.require(:choice).permit(:name, :description, :subject_id, :user_id)
+      params.require(:choice).permit(:name, :description, :vote, :subject_id, :user_id)
     end
 end
