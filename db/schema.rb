@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_194834) do
+ActiveRecord::Schema.define(version: 2020_02_04_051301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2019_12_19_194834) do
     t.index ["user_id"], name: "index_examples_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_likes_on_subject_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -54,8 +63,22 @@ ActiveRecord::Schema.define(version: 2019_12_19_194834) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  create_table "votes", id: :serial, force: :cascade do |t|
+    t.boolean "vote"
+    t.string "votable_type"
+    t.integer "votable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
+  end
+
   add_foreign_key "choices", "subjects"
   add_foreign_key "choices", "users"
   add_foreign_key "examples", "users"
+  add_foreign_key "likes", "subjects"
+  add_foreign_key "likes", "users"
   add_foreign_key "subjects", "users"
+  add_foreign_key "votes", "users"
 end
