@@ -1,37 +1,12 @@
-My Own Content for Vote
-# rails-api-template
+Work in progress!!
+# Poll Position API
 
-A template for starting projects with `rails-api`. Includes authentication.
+![ERD](PollPosition.png)
 
-At the beginning of each cohort, update the versions in [`Gemfile`](Gemfile).
 
-## Prerequisites
 
--   [rails-api-examples-walkthrough](https://git.generalassemb.ly/ga-wdi-boston/rails-api-examples-walkthrough)
-
-## Dependencies
-
-Install with `bundle install`.
-
--   [`rails-api`](https://github.com/rails-api/rails-api)
--   [`rails`](https://github.com/rails/rails)
--   [`active_model_serializers`](https://github.com/rails-api/active_model_serializers)
--   [`ruby`](https://www.ruby-lang.org/en/)
--   [`postgres`](http://www.postgresql.org)
 
 ## Installation
-
-### Download Template:
-1.  [Download](../../archive/master.zip) this template.
-1.  Unzip and rename the template directory (`unzip ~/Downloads/rails-api-template-master.zip`)
-1.  Move into the new project and `git init`.
-
-### Customize Template:
-1.  Empty [`README.md`](README.md) and fill with your own content.
-1.  Rename your app module in `config/application.rb` (change
-    `RailsApiTemplate`).
-1.  Rename your project database in `config/database.yml` (change
-    `'rails-api-template'`).
 
 ### Setup Environment:
 1.  Install dependencies with `bundle install`.
@@ -59,28 +34,6 @@ Install with `bundle install`.
 ### Run your server!
 1. Run the API server with `bin/rails server` or `bundle exec rails server`.
 
-## Structure
-
-This template follows the standard [project structure](https://gist.git.generalassemb.ly/danman01/64472678e25552412050c237ced48964) in Rails.
-
-`curl` command scripts are stored in [`curl-scripts`](curl-scripts) with names that
-correspond to API actions.
-
-User authentication is built-in.
-
-Tests (also called specs) are located in the `spec` folder.
-
-## Tasks
-
-Developers should run these often!
-
--   `bin/rails routes` lists the endpoints available in your API.
--   `bin/rspec spec` runs automated tests located in the `spec` folder.
--   `bin/rails console` opens a REPL that pre-loads the API.
--   `bin/rails db` opens your database client and loads the correct database.
--   `bin/rails server` starts the API.
--   `curl-scripts/*.sh` run various `curl` commands to test the API. See below.
-
 ## API
 
 Use this as the basis for your own API documentation. Add a new third-level
@@ -91,6 +44,51 @@ Scripts are included in [`curl-scripts`](curl-scripts) to test built-in actions.
 own scripts to test your custom API. As an alternative, you can write automated
 tests in RSpec to test your API.
 
+### Subjects Endpoints and Curl Scripts
+
+| Verb   | URI Pattern            | Controller#Action |
+|--------|------------------------|-------------------|
+| POST   | `/subjects`            | `subjects#create` |
+| GET    | `/subjects`            | `subjects#index`  |
+| GET    | `/subjects/:id`        | `subjects#show`   |
+| DELETE | `/subjects/:id`        | `subject#destroy` |
+| PATCH  | `/subjects/:id`        | `subject#update`  |
+
+#### POST /create
+
+Request:
+
+```sh
+curl "http://localhost:4741/subjects" \
+  --include \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Token token=${TOKEN}" \
+  --data '{
+    "subject": {
+      "title": "'"${TITLE}"'",
+      "description": "'"${DESCRIPTION}"'"
+    }
+  }'
+```
+```sh
+TOKEN="xxxxxxxxx" TITLE="Title" DESCRIPTION="Description" sh curl-scripts/subjects/create.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+
+{
+  "subject": {
+    "id": 1,
+    "title": "Title",
+    "description": "Description"
+  }
+}
+```
 ### Authentication Endpoints and Curl Scripts
 
 | Verb   | URI Pattern            | Controller#Action |
