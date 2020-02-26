@@ -1,4 +1,4 @@
-class SubjectsController < ProtectedController
+class SubjectsController < OpenReadController
   before_action :set_subject, only: [:show, :update, :destroy]
 
   # GET /subjects
