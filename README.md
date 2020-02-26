@@ -1,10 +1,10 @@
 # Poll Position API
 
-[Deployed API](https://gentle-beach-45706.herokuapp.com/)
+[Deployed API](https://salty-cliffs-30565.herokuapp.com/)
 
-[Deployed Client](https://gmorse19.github.io/ConstGamer/)
+[Deployed Client](https://gmorse19.github.io/PollPosition/)
 
-[Client Repo](https://github.com/GMorse19/ConstGamer)
+[Client Repo](https://github.com/GMorse19/PollPosition)
 
 ## ERD
 
